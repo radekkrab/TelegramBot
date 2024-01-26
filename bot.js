@@ -6,7 +6,7 @@ const bot = new Telegraf(config.telegramToken, {});
 bot.start((ctx) => ctx.reply('Welcome'));
 bot.on ('message', async (ctx) => {
     if('ctx.message.location'){
-        const weatherAPIUrl = `http://api.weatherapi.com/v1/current.json?key=0b68a6f2832d45b992035833242601&q= + ${ctx.message.location.latitude},${ctx.message.location.longitude}
+        const weatherAPIUrl = `${config.weatherURL} + ${ctx.message.location.latitude},${ctx.message.location.longitude}
         `;
         const response = await axios.get(weatherAPIUrl);
         ctx.reply(`${response.data.location.name}, температура: ${response.data.current.temp_c}°C`);
